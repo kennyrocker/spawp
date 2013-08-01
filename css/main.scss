@@ -1,0 +1,67 @@
+/*---Global---*/
+/*Global Variables*/
+$black:#000;
+
+$header-gradient-light:#85FDFE;
+$header-gradient-mid:#84E4E8;
+$header-gradient-dark:#84A4A8;
+
+$main-gradient-light:#D0F1CF;
+$main-gradient-mid:#AEDAAD;
+$main-gradient-dark:#9BCE9A;
+
+/*-------Global Mixing For Easy Access DONT MODIFY HERE------*/
+
+@mixin border-radius($radius:10px){
+	-moz-border-radius: $radius; 
+  	-webkit-border-radius: $radius; 
+  	border-radius: $radius; 
+}
+@mixin radius-gradient($from,$mid,$to){
+	background: $from; 
+	background: -moz-radial-gradient(center, ellipse cover,  $from 0%, $mid 44%, $to 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,$from), color-stop(44%,$mid), color-stop(100%,$to)); 
+	background: -webkit-radial-gradient(center, ellipse cover,  $from 0%,$mid 44%,$to 100%);
+	background: -o-radial-gradient(center, ellipse cover,  $from 0%,$mid 44%,$to 100%); 
+	background: -ms-radial-gradient(center, ellipse cover,  $from 0%,$mid 44%,$to 100%); 
+	background: radial-gradient(ellipse at center,  $from 0%,$mid 44%,$to 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=1 ); 
+}
+@mixin vertical-gradient($top,$mid,$btm){
+	background: $top; 
+	background: -moz-linear-gradient(top, $top 0%, $mid 49%, $btm 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(49%,$mid), color-stop(100%,$btm)); 
+	background: -webkit-linear-gradient(top, $top 0%,$mid 49%,$btm 100%); 
+	background: -o-linear-gradient(top, $top 0%,$mid 49%,$btm 100%);
+	background: -ms-linear-gradient(top, $top 0%,$mid 49%,$btm 100%); 
+	background: linear-gradient(to bottom, $top 0%,$mid 49%,$btm 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$top', endColorstr='$btm',GradientType=0 ); 
+}
+@mixin horizontal-gradient($left,$mid,$right){
+	background: $left; 
+	background: -moz-linear-gradient(left,  $left 0%, $mid 49%, $right 100%); 
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,$left), color-stop(49%,$mid), color-stop(100%,$right)); 
+	background: -webkit-linear-gradient(left,  $left 0%,$mid 49%,$right 100%); 
+	background: -o-linear-gradient(left,  $left 0%,$mid 49%,$right 100%); 
+	background: -ms-linear-gradient(left,  $left 0%,$mid 49%,$right 100%); 
+	background: linear-gradient(to right,  $left 0%,$mid 49%,$right 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$left', endColorstr='$right',GradientType=1 ); 
+}
+/*-------END Global Mixing For Easy Access DONT MODIFY HERE------*/
+
+/**Global Section**/
+#main{
+	@include horizontal-gradient($main-gradient-dark,$main-gradient-light,$main-gradient-dark);
+	min-height:400px;
+}
+/**Admin Section**/
+#login{
+
+	
+}
+
+span{
+	display:block;
+	float:left;
+	text-align:right;
+}
