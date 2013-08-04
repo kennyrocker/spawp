@@ -26,21 +26,19 @@ var K_LoginView = Backbone.View.extend({
 		// prep valdation object
 		var valiObj = {
 			fields:[
-				{	
+				{
 					id:'username-input',
 					requireBln:true,
 					requireMessageStr:'username required',
-					regExp:'[a-Z]',
-					regExpMessageStr:'no number allow',
-					noScriptBln:true
+					regExp:'[a-z]',
+					regExpMessageStr:'no number allow'
 				},
 				{
 					id:'password-input',
 					requireBln:true,
 					requireMessageStr:'password required',
 					regExp:'[0-9]',
-					regExpMessageStr:'no character allow',
-					noScriptBln:true
+					regExpMessageStr:'no character allow'
 				}
 			],
 			standerHex:'#000',
@@ -48,25 +46,10 @@ var K_LoginView = Backbone.View.extend({
 		};
 		//call validation
 		loginBln = this.validate(valiObj);
-		//console.log("FINAL loginBln => "+loginBln);
-		//validation
-
-		/*
-		if(common.isValid({str:userNameStr,regStr:'[a-z]'})){
-			common.killError({id:'username-input',hex:'#000',message:'no number allow'});
-		}else{
-			common.showError({id:'username-input',hex:'red',message:'no number allow'});
-		}
-		if(common.isValid({str:passWordStr,regStr:'[0-9]'})){
-			common.killError({id:'password-input',hex:'#000',message:'no character allow'});
-		}else{
-			common.showError({id:'password-input',hex:'red',message:'no character allow'});
-		}
-		*/
+		console.log("FINAL loginBln => "+loginBln);
 	},
 	validate:function(obj){
 		var vBln = common.validate(obj);
-		//console.log('validate vBln => '+vBln);
 		return vBln;
 	}
 });

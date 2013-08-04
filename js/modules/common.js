@@ -3,6 +3,7 @@
  * K_Common is a class that contains common, reuable functions accessible from anywhere.
  */
 function common(){
+	// scope alias
 	var self = this;
 	/*-----------------------------------------------------*/
 	/*----------------- Validation Methods ----------------*/
@@ -70,31 +71,12 @@ function common(){
 			$('.'+id+'-'+cls).html(fullErrorStr);
 			// fade in error span
 			$('.'+id+'-'+cls).fadeIn('slow');
-
 	};
-
-	/*anonomus error counter*/
-	/*
-	function errorCount(){
-		errorNum = 0;
-		this.plus = function(){
-			errorNum++;
-			console.log('ERROR COUNT PLUS EM '+errorNum);
-			return errorNum;
-		};
-		this.remove =function(){
-			errorNum--;
-			console.log('ERROR COUNT REMOVE EM '+errorNum);
-			return errorNum;
-		};
-		console.log('ERROR COUNT EM '+errorNum);
-		return errorNum;
-	}
-	*/
 	/*call multipule validation methods and return a bln*/
 	this.validate=function(obj){
 		// define global validate bln as false
 		var validateBln = false;
+		var valiteCountNum = 0;
 		var fields = obj.fields;
 		// if fields count more than 0
 		if(fields.length > 0){
@@ -104,75 +86,68 @@ function common(){
 					fieldObj.standerHex = obj.standerHex;
 					fieldObj.errorHex = obj.errorHex;
 				// call validate each field
-				validateBln = this.validateField(fieldObj);	
-				console.log('x--------------------------x');
-				//console.log('validateBln in validate 1'+validateBln);
+				var tmpBln = self.validateField(fieldObj);
+				if(tmpBln === true) valiteCountNum++;
 			}
 		}
-		//console.log('validateBln in validate 2'+validateBln);
+		//if valiteCountNum equal to amout of fileds set validateBln to ture
+		if(valiteCountNum == fields.length) validateBln = true;
 		return validateBln;
 	};
-
-	
-
 	/*validate each field*/
 	this.validateField=function(obj){
-		console.log('validateField being call one time');
+		// define global validation bln
 		var validateBln = false;
-		//var errorNum = 0;
-		
+		// define check blns
 		var rfBln = false;
 		var nsBln = false;
 		var rgBln = false;
-		
-		//console.log('validateField start '+errorNum);
+		// get value by id
 		var valueStr = $('#'+obj.id).val();
-			//if require field
+			// no script check by defalut
+			var erObj = {id:obj.id,hex:obj.standerHex,message:'No script allow!!'};
+			if(self.isValid({str:valueStr,matchBln:false,regStr:'<script>'})){
+				self.killError(erObj);
+				nsBln = true;
+			}else{
+				erObj.hex = obj.errorHex;
+				self.showError(erObj);
+				nsBln = false;
+			}
+			//if require field check
 			if(obj.requireBln===true){
-				//console.log('rf start '+errorNum);
 				var errorObj = {id:obj.id,hex:obj.standerHex,message:obj.requireMessageStr};
 				if(self.isFilled({str:valueStr})){
 					self.killError(errorObj);
 					rfBln = true;
-					//errorNum = errorNum - 1;
-					//console.log('vf rf -true ' +errorNum);
 				}else{
 					errorObj.hex = obj.errorHex;
 					self.showError(errorObj);
-					rfBln = false;				
-					//errorNum = errorNum + 1;
-					//errorNum.plus();
-					//console.log('vf rf +false '+errorNum);
+					rfBln = false;
 				}
-				//console.log('rf end '+errorNum);
-				console.log('rfBln after isFilled Test '+rfBln);
 			}
-			//if no script allow
-			if(obj.noScriptBln===true){
-				//console.log('vf start '+errorNum);
-				var errorObj = {id:obj.id,hex:obj.standerHex,message:'No script allow!!'};
-				if(self.isValid({str:valueStr,matchBln:false,regStr:'<script>'})){
-					self.killError(errorObj);
-					nsBln = true;
-					//errorNum = errorNum -1;
-					//errorNum.remove();
-					//console.log('vf ns -false '+errorNum);
+			//if regular expressions check
+			if(obj.regExp!==undefined && obj.regExpMessageStr!==undefined){
+				//console.log('regExp Check');
+				var eObj = {id:obj.id,hex:obj.standerHex,message:obj.regExpMessageStr};
+				if(self.isValid({str:valueStr,regStr:obj.regExp})){
+					self.killError(eObj);
+					rgBln = true;
 				}else{
-					errorObj.hex = obj.errorHex;
-					self.showError(errorObj);
-					nsBln = false;
-					//errorNum = errorNum + 1;
-					//errorNum.plus();
-					//console.log('vf ns +true '+errorNum);
+					eObj.hex = obj.errorHex;
+					self.showError(eObj);
+					rgBln = false;
 				}
-				//console.log('vf end '+errorNum);
-				console.log('nsBln after isValid Test '+rfBln);
 			}
-			//if regular expressions
-		//console.log('validateField end --> '+errorNum);
-
-		console.log('rfBln after All '+rfBln);
-		console.log('nsBln after All '+nsBln);
+		//determind validateBln base on obj
+			// all condition check
+			if(obj.requireBln===true && obj.regExp!==undefined){
+				if(rfBln===true && rgBln===true && nsBln===true) validateBln = true;
+			}
+			// require field check only
+			else{
+				if(rfBln===true && nsBln===true) validateBln = true;
+			}
 		return validateBln;
 	};
 }
