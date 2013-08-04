@@ -4,6 +4,9 @@
  */
 function common(){
 	var self = this;
+	/*-----------------------------------------------------*/
+	/*----------------- Validation Methods ----------------*/
+	/*-----------------------------------------------------*/
 	/*reqire fill valiatior*/
 	this.isFilled =function(obj){
 		return obj.str !=='';
@@ -69,6 +72,25 @@ function common(){
 			$('.'+id+'-'+cls).fadeIn('slow');
 
 	};
+
+	/*anonomus error counter*/
+	/*
+	function errorCount(){
+		errorNum = 0;
+		this.plus = function(){
+			errorNum++;
+			console.log('ERROR COUNT PLUS EM '+errorNum);
+			return errorNum;
+		};
+		this.remove =function(){
+			errorNum--;
+			console.log('ERROR COUNT REMOVE EM '+errorNum);
+			return errorNum;
+		};
+		console.log('ERROR COUNT EM '+errorNum);
+		return errorNum;
+	}
+	*/
 	/*call multipule validation methods and return a bln*/
 	this.validate=function(obj){
 		// define global validate bln as false
@@ -83,54 +105,76 @@ function common(){
 					fieldObj.errorHex = obj.errorHex;
 				// call validate each field
 				validateBln = this.validateField(fieldObj);	
-				console.log('validateBln in validate 1'+validateBln);
+				console.log('x--------------------------x');
+				//console.log('validateBln in validate 1'+validateBln);
 			}
 		}
-		console.log('validateBln in validate 2'+validateBln);
-		return validateBln;
-	};
-	/*validate each field*/
-	this.validateField=function(obj){
-		//console.log(obj);
-		var validateBln = false;
-		var errorNum = 0;
-		var valueStr = $('#'+obj.id).val();
-			//if require field
-			if(obj.requireBln===true){
-				var errorObj = {id:obj.id,hex:obj.standerHex,message:obj.requireMessageStr};
-				if(self.isFilled({str:valueStr})){
-					self.killError(errorObj);
-					//validateBln = true;
-					console.log('vf rf -1');
-					errorNum --;
-				}else{
-					errorObj.hex = obj.errorHex;
-					self.showError(errorObj);
-					//validateBln = false;
-					console.log('vf rf +1');
-					errorNum ++;
-				}
-			}
-			//if no script allow
-			if(obj.noScriptBln===true){
-				var errorObj = {id:obj.id,hex:obj.standerHex,message:'No script allow!!'};
-				if(self.isValid({str:valueStr,matchBln:false,regStr:'<script>'})){
-					self.killError(errorObj);
-					//validateBln = true;
-					console.log('vf ns -1');
-					errorNum --;
-				}else{
-					errorObj.hex = obj.errorHex;
-					self.showError(errorObj);
-					//validateBln = false;
-					console.log('vf ns +1');
-					errorNum ++;
-				}
-			}
-			//if regular expressions
-		console.log('errorNum --> '+errorNum);
+		//console.log('validateBln in validate 2'+validateBln);
 		return validateBln;
 	};
 
+	
+
+	/*validate each field*/
+	this.validateField=function(obj){
+		console.log('validateField being call one time');
+		var validateBln = false;
+		//var errorNum = 0;
+		
+		var rfBln = false;
+		var nsBln = false;
+		var rgBln = false;
+		
+		//console.log('validateField start '+errorNum);
+		var valueStr = $('#'+obj.id).val();
+			//if require field
+			if(obj.requireBln===true){
+				//console.log('rf start '+errorNum);
+				var errorObj = {id:obj.id,hex:obj.standerHex,message:obj.requireMessageStr};
+				if(self.isFilled({str:valueStr})){
+					self.killError(errorObj);
+					rfBln = true;
+					//errorNum = errorNum - 1;
+					//console.log('vf rf -true ' +errorNum);
+				}else{
+					errorObj.hex = obj.errorHex;
+					self.showError(errorObj);
+					rfBln = false;				
+					//errorNum = errorNum + 1;
+					//errorNum.plus();
+					//console.log('vf rf +false '+errorNum);
+				}
+				//console.log('rf end '+errorNum);
+				console.log('rfBln after isFilled Test '+rfBln);
+			}
+			//if no script allow
+			if(obj.noScriptBln===true){
+				//console.log('vf start '+errorNum);
+				var errorObj = {id:obj.id,hex:obj.standerHex,message:'No script allow!!'};
+				if(self.isValid({str:valueStr,matchBln:false,regStr:'<script>'})){
+					self.killError(errorObj);
+					nsBln = true;
+					//errorNum = errorNum -1;
+					//errorNum.remove();
+					//console.log('vf ns -false '+errorNum);
+				}else{
+					errorObj.hex = obj.errorHex;
+					self.showError(errorObj);
+					nsBln = false;
+					//errorNum = errorNum + 1;
+					//errorNum.plus();
+					//console.log('vf ns +true '+errorNum);
+				}
+				//console.log('vf end '+errorNum);
+				console.log('nsBln after isValid Test '+rfBln);
+			}
+			//if regular expressions
+		//console.log('validateField end --> '+errorNum);
+
+		console.log('rfBln after All '+rfBln);
+		console.log('nsBln after All '+nsBln);
+		return validateBln;
+	};
 }
+// initilize common namespace
 var common = new common();

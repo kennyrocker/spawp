@@ -23,10 +23,6 @@ var K_LoginView = Backbone.View.extend({
 	},
 	loginFnc:function(){
 		var loginBln = false;
-		//get user name
-		//var userNameStr = $('#username-input').val();
-		//get pass word
-		//var passWordStr = $('#password-input').val();
 		// prep valdation object
 		var valiObj = {
 			fields:[
@@ -52,31 +48,10 @@ var K_LoginView = Backbone.View.extend({
 		};
 		//call validation
 		loginBln = this.validate(valiObj);
-		console.log("FINAL loginBln => "+loginBln);
+		//console.log("FINAL loginBln => "+loginBln);
 		//validation
+
 		/*
-		if(common.isFilled({str:userNameStr})){
-			common.killError({id:'username-input',hex:'#000',message:'username required'});
-		}else{
-		 	common.showError({id:'username-input',hex:'red',message:'username required'});
-		}
-		if(common.isFilled({str:passWordStr})){
-			common.killError({id:'password-input',hex:'#000',message:'password required'});
-		}else{
-			common.showError({id:'password-input',hex:'red',message:'password required'});
-		}
-
-		if(common.isValid({str:userNameStr,matchBln:false,regStr:'<script>'})){
-			common.killError({id:'username-input',hex:'#000',message:'no script allow'});
-		}else{
-			common.showError({id:'username-input',hex:'red',message:'no script allow'});
-		}
-		if(common.isValid({str:passWordStr,matchBln:false,regStr:'<script>'})){
-			common.killError({id:'password-input',hex:'#000',message:'no script allow'});
-		}else{
-			common.showError({id:'password-input',hex:'red',message:'no script allow'});
-		}
-
 		if(common.isValid({str:userNameStr,regStr:'[a-z]'})){
 			common.killError({id:'username-input',hex:'#000',message:'no number allow'});
 		}else{
@@ -91,7 +66,7 @@ var K_LoginView = Backbone.View.extend({
 	},
 	validate:function(obj){
 		var vBln = common.validate(obj);
-		console.log('validate vBln => '+vBln);
+		//console.log('validate vBln => '+vBln);
 		return vBln;
 	}
 });
