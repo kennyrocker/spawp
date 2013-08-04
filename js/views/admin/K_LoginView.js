@@ -28,19 +28,44 @@ var K_LoginView = Backbone.View.extend({
 		//get pass word
 		var passWordStr = $('#password-input').val();
 		//validation
-		//vBln = common.rfv({Str:userNameStr});
-		if(common.isFilled({Str:userNameStr})){
-			// show error message
-			//console.log('username needed');
-			common.showError({id:'username-input',message:'username required'});
+		if(common.isFilled({str:userNameStr})){
+			common.killError({id:'username-input',message:'username required'});
+		}else{
+		 	common.showError({id:'username-input',message:'username required'});
 		}
-		if(common.isFilled({Str:passWordStr})){
-			// show error message
-			//console.log('pass needed');
-			common.showError({});
+		if(common.isFilled({str:passWordStr})){
+			common.killError({id:'password-input',message:'password required'});
+		}else{
+			common.showError({id:'password-input',message:'password required'});
 		}
-		//call login
-			//console.log("login btn clicked"+this.cid);
-		//});
+		
+		//console.log("view name with script regx "+common.isValid({str:userNameStr,matchBln:false,regStr:'<script>'}));
+		//console.log("view pass with script regx "+common.isValid({str:passWordStr,matchBln:false,regStr:'<script>'}));
+		
+		if(common.isValid({str:userNameStr,matchBln:false,regStr:'<script>'})){
+			common.killError({id:'username-input',message:'no script allow'});
+		}else{
+			common.showError({id:'username-input',message:'no script allow'});
+		}
+		if(common.isValid({str:passWordStr,matchBln:false,regStr:'<script>'})){
+			common.killError({id:'password-input',message:'no script allow'});
+		}else{
+			common.showError({id:'password-input',message:'no script allow'});
+		}
+		
+		//console.log("view name with char regx "+common.isValid({str:userNameStr,regStr:'[a-z]'}));
+		//console.log("view pass with num regx "+common.isValid({str:passWordStr,regStr:'[0-9]'}));
+		
+		if(common.isValid({str:userNameStr,regStr:'[a-z]'})){
+			common.killError({id:'username-input',message:'no number allow'});
+		}else{
+			common.showError({id:'username-input',message:'no number allow'});
+		}
+		if(common.isValid({str:passWordStr,regStr:'[0-9]'})){
+			common.killError({id:'password-input',message:'no character allow'});
+		}else{
+			common.showError({id:'password-input',message:'no character allow'});
+		}
+		
 	}
 });
