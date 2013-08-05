@@ -29,16 +29,16 @@ var K_LoginView = Backbone.View.extend({
 				{
 					id:'username-input',
 					requireBln:true,
-					requireMessageStr:'username required',
-					regExp:'[a-z]',
-					regExpMessageStr:'no number allow'
+					requireMessageStr:'username required'
+					//regExp:'[a-z]',
+					//regExpMessageStr:'no number allow'
 				},
 				{
 					id:'password-input',
 					requireBln:true,
-					requireMessageStr:'password required',
-					regExp:'[0-9]',
-					regExpMessageStr:'no character allow'
+					requireMessageStr:'password required'
+					//regExp:'[0-9]',
+					//regExpMessageStr:'no character allow'
 				}
 			],
 			standerHex:'#000',
@@ -46,7 +46,7 @@ var K_LoginView = Backbone.View.extend({
 		};
 		//call validation
 		loginBln = this.validate(valiObj);
-		console.log("FINAL loginBln => "+loginBln);
+		if(loginBln) console.log('do login');
 	},
 	validate:function(obj){
 		var vBln = common.validate(obj);

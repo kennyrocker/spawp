@@ -10,5 +10,6 @@ var K_AdminView = Backbone.View.extend({
 		instance = new K_LoginView();
 		$('#Admin').html(instance.render().el);
 		//instance.events();
+		//console.log(this.model);
 	}
 });

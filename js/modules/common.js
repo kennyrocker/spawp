@@ -48,7 +48,7 @@ function common(){
 				// add message to error span
 				$('.'+id+'-'+cls).append(message+' ');
 				// fade in error span
-				$('.'+id+'-'+cls).fadeIn('slow');
+				$('.'+id+'-'+cls).fadeIn();
 			}
 	};
 	/*kill error message*/
@@ -70,7 +70,7 @@ function common(){
 			// rewrite span innerText
 			$('.'+id+'-'+cls).html(fullErrorStr);
 			// fade in error span
-			$('.'+id+'-'+cls).fadeIn('slow');
+			$('.'+id+'-'+cls).fadeIn();
 	};
 	/*call multipule validation methods and return a bln*/
 	this.validate=function(obj){
