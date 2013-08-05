@@ -3,13 +3,12 @@ var loginModel = Backbone.Model.extend({
         loggedIn: false,
         apiKey: null
     },
-    initialize: function () {
-    	console.log('wtf');
+    initialize: function(){
         this.bind('change:apiKey', this.onApiKeyChange, this);
         this.set({'apiKey': localStorage.getItem('apiKey')});
     },
 
-    onApiKeyChange: function (status, apiKey) {
+    onApiKeyChange: function(status, apiKey) {
         this.set({'loggedIn': !!apiKey});
     },
 

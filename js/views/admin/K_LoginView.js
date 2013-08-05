@@ -9,13 +9,16 @@ var K_LoginView = Backbone.View.extend({
 		'<span class="password-input-error"></span>'+
 		'<button id="loginBtn">Login</button>'
 	),
+	tagName:'section',
+	className:'K_LoginView',
 	// Login View use loginModel
 	initialize:function(){
-
+		console.log('call once');
 	},
 	render:function(){
 		//console.log("lgoinView.render", this.outerHTML);
-		this.$el.html(this.template());
+		// empty el first then appen templatle to avoid event zombie
+		this.$el.empty().append(this.template());
 		this.delegateEvents({
 			'click #loginBtn' : 'loginFnc'
 		});
@@ -46,7 +49,7 @@ var K_LoginView = Backbone.View.extend({
 		};
 		//call validation
 		loginBln = this.validate(valiObj);
-		if(loginBln) console.log('do login');
+		if(loginBln) console.log('input valid do login');
 	},
 	validate:function(obj){
 		var vBln = common.validate(obj);

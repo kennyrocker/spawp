@@ -9,11 +9,8 @@ var AppRouter = Backbone.Router.extend({
 
 	initialize:function(){
 		// handel session //
-		//this.postMd = null;
-		//this.postMd = new postModel();
-		//console.log(this.postMd);
-		this.model = new loginModel();
-		console.log(this.model);
+		this.LOGINMODEL = new loginModel();
+		console.log(this.LOGINMODEL);
 	},
 
 	Home: function () {
@@ -29,11 +26,11 @@ var AppRouter = Backbone.Router.extend({
 		var contactView = new K_ContactView();
 	},
 	Admin: function(){
-		var adminView = new K_AdminView({model:this.model});
+		var adminView = new K_AdminView({model:this.LOGINMODEL});
 	}
 });
 
-var app = new AppRouter();
+var APP = new AppRouter();
 
 $(function() {
 	Backbone.history.start();
