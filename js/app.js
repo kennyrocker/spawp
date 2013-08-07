@@ -8,9 +8,9 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	initialize:function(){
-		// handel session //
+		// handel session 
+		// set up GLOBAL LOGIN MODEL
 		this.LOGINMODEL = new loginModel();
-		console.log(this.LOGINMODEL);
 	},
 
 	Home: function () {

@@ -72,7 +72,28 @@ function common(){
 			// fade in error span
 			$('.'+id+'-'+cls).fadeIn();
 	};
-	/*call multipule validation methods and return a bln*/
+	/*-----EXPECING OJECT---- 
+	 *	{	
+	 		fields:[
+				{
+					id:'username-input',
+					requireBln:true,
+					requireMessageStr:'username required'
+					//regExp:'[a-z]',
+					//regExpMessageStr:'no number allow'
+				},
+				{
+					id:'password-input',
+					requireBln:true,
+					requireMessageStr:'password required'
+					//regExp:'[0-9]',
+					//regExpMessageStr:'no character allow'
+				}
+			],
+			standerHex:'#000',
+			errorHex:'red'
+		}		
+	 *call multipule validation methods and return a bln*/
 	this.validate=function(obj){
 		// define global validate bln as false
 		var validateBln = false;

@@ -13,18 +13,19 @@ var K_LoginView = Backbone.View.extend({
 	className:'K_LoginView',
 	// Login View use loginModel
 	initialize:function(){
-		console.log('call once');
+		this.model = APP.LOGINMODEL;
+		console.log('K_LoginView init ',this.model);
 	},
 	render:function(){
 		//console.log("lgoinView.render", this.outerHTML);
 		// empty el first then appen templatle to avoid event zombie
 		this.$el.empty().append(this.template());
 		this.delegateEvents({
-			'click #loginBtn' : 'loginFnc'
+			'click #loginBtn' : 'loginClicked'
 		});
 		return this;
 	},
-	loginFnc:function(){
+	loginClicked:function(){
 		var loginBln = false;
 		// prep valdation object
 		var valiObj = {
@@ -33,15 +34,11 @@ var K_LoginView = Backbone.View.extend({
 					id:'username-input',
 					requireBln:true,
 					requireMessageStr:'username required'
-					//regExp:'[a-z]',
-					//regExpMessageStr:'no number allow'
 				},
 				{
 					id:'password-input',
 					requireBln:true,
 					requireMessageStr:'password required'
-					//regExp:'[0-9]',
-					//regExpMessageStr:'no character allow'
 				}
 			],
 			standerHex:'#000',
@@ -49,10 +46,15 @@ var K_LoginView = Backbone.View.extend({
 		};
 		//call validation
 		loginBln = this.validate(valiObj);
-		if(loginBln) console.log('input valid do login');
+		if(loginBln) this.postLogin();
 	},
 	validate:function(obj){
 		var vBln = common.validate(obj);
 		return vBln;
+	},
+	postLogin:function(){
+		var userNameStr = $('#username-input').val();
+		var passWordStr = $('#password-input').val();
+		console.log('post to backend with ==> '+userNameStr+' // '+passWordStr);
 	}
 });
