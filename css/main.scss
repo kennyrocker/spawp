@@ -1,6 +1,8 @@
-/*---Global---*/
-/*Global Variables*/
+/*---Global CSS---*/
+
+/*-------Global SASS Variables-----------*/
 $black:#000;
+
 
 $header-gradient-light:#85FDFE;
 $header-gradient-mid:#84E4E8;
@@ -9,8 +11,9 @@ $header-gradient-dark:#84A4A8;
 $main-gradient-light:#D0F1CF;
 $main-gradient-mid:#AEDAAD;
 $main-gradient-dark:#9BCE9A;
+/*-------END Global SASS Variables--------*/
 
-/*-------Global Mixing For Easy Access DONT MODIFY HERE------*/
+/*-------Global SASS Mixing For Easy Access DONT MODIFY HERE------*/
 
 @mixin border-radius($radius:10px){
 	-moz-border-radius: $radius; 
@@ -47,21 +50,24 @@ $main-gradient-dark:#9BCE9A;
 	background: linear-gradient(to right,  $left 0%,$mid 49%,$right 100%); 
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$left', endColorstr='$right',GradientType=1 ); 
 }
-/*-------END Global Mixing For Easy Access DONT MODIFY HERE------*/
+/*-------END Global SASS Mixing For Easy Access DO NOT MODIFY HERE------*/
 
-/**Global Section**/
+/**----------------------------**/
+/**         GLOBAL CSS 		     **/
+/**----------------------------**/
 #main{
 	@include horizontal-gradient($main-gradient-dark,$main-gradient-light,$main-gradient-dark);
-	min-height:400px;
+	min-height:300px;
 }
-/**Admin Section**/
-#login{
 
-	
-}
+/**Admin Section**/
+
 
 span{
 	display:block;
 	float:left;
 	text-align:right;
 }
+
+
+

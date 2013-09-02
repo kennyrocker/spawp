@@ -1,8 +1,11 @@
-/*---Global---*/
-/*Global Variables*/
-/*-------Global Mixing For Easy Access DONT MODIFY HERE------*/
-/*-------END Global Mixing For Easy Access DONT MODIFY HERE------*/
-/**Global Section**/
+/*---Global CSS---*/
+/*-------Global SASS Variables-----------*/
+/*-------END Global SASS Variables--------*/
+/*-------Global SASS Mixing For Easy Access DONT MODIFY HERE------*/
+/*-------END Global SASS Mixing For Easy Access DO NOT MODIFY HERE------*/
+/**----------------------------**/
+/**         GLOBAL CSS 		     **/
+/**----------------------------**/
 #main {
   background: #9bce9a;
   background: -moz-linear-gradient(left, #9bce9a 0%, #d0f1cf 49%, #9bce9a 100%);
@@ -12,7 +15,7 @@
   background: -ms-linear-gradient(left, #9bce9a 0%, #d0f1cf 49%, #9bce9a 100%);
   background: linear-gradient(to right, #9bce9a 0%, #d0f1cf 49%, #9bce9a 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$left', endColorstr='$right',GradientType=1 );
-  min-height: 400px; }
+  min-height: 300px; }
 
 /**Admin Section**/
 span {
