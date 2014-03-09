@@ -79,15 +79,15 @@ function common(){
 					id:'username-input',
 					requireBln:true,
 					requireMessageStr:'username required'
-					//regExp:'[a-z]',
-					//regExpMessageStr:'no number allow'
+					regExp:'[a-z]',
+					regExpMessageStr:'no number allow'
 				},
 				{
 					id:'password-input',
 					requireBln:true,
 					requireMessageStr:'password required'
-					//regExp:'[0-9]',
-					//regExpMessageStr:'no character allow'
+					regExp:'[0-9]',
+					regExpMessageStr:'no character allow'
 				}
 			],
 			standerHex:'#000',
